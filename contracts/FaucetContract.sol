@@ -1,22 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.9.0;
 
-import "./Owned.sol";
-import "./Logger.sol";
-import "./IFaucet.sol";
 
-contract Faucet is Owned, Logger, IFaucet{
+
+contract Faucet {
 
     //storage variables
     uint public numOfFunders;
     
+    address public owner;
     mapping(address => bool) public funders;
     mapping(uint => address) public rgtFunders;
 
     
 
     //modifiers
-
+    modifier isOwner {
+        require(msg.sender == owner,"Only owner can use this.");
+        _;
+    }
     
 
     modifier limitWithdraw(uint withdrawAmount) {
@@ -29,11 +31,9 @@ contract Faucet is Owned, Logger, IFaucet{
     //função receive
     receive() external payable {}
 
-    function emitLog() public override pure returns(bytes32){
-        return "Hello World";
-    }
+    
 
-    function addFunds()  external override payable {
+    function addFunds()  external payable {
         address funder = msg.sender;
         
 
@@ -44,7 +44,7 @@ contract Faucet is Owned, Logger, IFaucet{
         }
     }
 
-    function withdraw(uint withdrawAmount) external override limitWithdraw(withdrawAmount){
+    function withdraw(uint withdrawAmount) external  limitWithdraw(withdrawAmount){
         
         payable(msg.sender).transfer(withdrawAmount);
 
@@ -73,7 +73,7 @@ contract Faucet is Owned, Logger, IFaucet{
 //Comandos do truffle console
 
 //const instance = await Faucet.deployed()
-//instance.addFunds({from:accounts[1], value:"2000000000000000000"})
+//0xB7AC6519F010F1710Fb1Bb46a64ca4A08097d07a)
 //instance.addFunds({from:accounts[2], value:"2000000000000000000"})
 
 //instance.withdraw("500000000000000000", {from: accounts[1]})
