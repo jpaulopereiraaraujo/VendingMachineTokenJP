@@ -3,6 +3,9 @@ import "./App.css"
 import Web3 from "web3";
 import detectEthereumProvider from '@metamask/detect-provider'
 import {loadContract} from "./utils/load-contract";
+import videoBG from './assets/block.mp4'
+
+
 
 function App() {
   const [web3Api, setWeb3Api] = useState ({
@@ -118,9 +121,15 @@ function App() {
   return (
 
     
-
-  
     <>
+
+      <div className='mainVB'>
+        <div className="overlay"></div>
+
+        <video src={videoBG} autoPlay loop muted />
+
+      </div>
+
 
 <nav class="navbar is-transparent">
   <div class="navbar-brand">
@@ -174,6 +183,9 @@ function App() {
             </a>
           </p>
 
+
+                
+
         <p class="control">
             <a class="button is-primary" href="https://github.com/jpaulopereiraaraujo">
               <span class="icon">
@@ -196,6 +208,16 @@ function App() {
     </div>
   </div>
 </nav>
+
+<div>
+      <video loop autoPlay>
+        <source
+          src="https://file.lu/d/lvE/"
+          type="video/mp4"
+        />
+        Your browser does not support the video tag.
+      </video>
+    </div>
 
     <div className="faucet-wrapper">
       <div className="faucet">
