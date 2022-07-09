@@ -8,10 +8,11 @@ function App() {
   const [web3Api, setWeb3Api] = useState ({
     provider:null,
     web3:null,
-    contract:null
+    contract:null 
   })
   
   const[balance, setBalance]  = useState(null)
+  const[balanceT, setBalanceT] = useState(null)
   const[account, setAccount] = useState(null)
   const [shouldReload, reload] = useState(false)
 
@@ -26,7 +27,7 @@ function App() {
     const loadProvider = async () => {
         //O primeiro if é para sistemas atualizados
         const provider = await detectEthereumProvider();
-        const contract = await loadContract("Faucet", provider);
+        const contract = await loadContract("JPToken", provider);
         
         if(provider){
           setAccountListener(provider)
@@ -62,6 +63,7 @@ function App() {
 
         const loadBalance = async () => {
         const { contract, web3 } = web3Api
+        //getBalance é uma função nativa da lib
         const balance = await web3.eth.getBalance(contract.address)
         // converte de wei para ether
         setBalance(web3.utils.fromWei(balance,"ether"))
@@ -71,10 +73,29 @@ function App() {
 
       web3Api.contract && loadBalance()
     },[web3Api, shouldReload])
+
+    useEffect(() => {
+      
+        
+      
+
+      const loadBalanceT = async () => {
+      const { contract } = web3Api
+      //getBalance é uma função nativa da lib
+      const accounts = await web3Api.web3.eth.getAccounts()
+      const balanceT = await contract.balanceOf(accounts[0]).then(b => {return b.toString()})
+      // converte de wei para ether
+      setBalanceT(balanceT)
+
+    }
+
+
+    web3Api.contract && loadBalanceT()
+  },[web3Api, shouldReload])
     
-    const addFunds = useCallback(async () => {
+    const buyToken10 = useCallback(async () => {
       const { contract, web3 } = web3Api
-      await contract.addFunds({
+      await contract.buy10({
         from: account,
         value: web3.utils.toWei("1", "ether")
       })
@@ -83,10 +104,9 @@ function App() {
       reloadEffect()
     }, [web3Api,account, reloadEffect])
 
-    const withdrawFunds = async () => {
-      const { contract, web3 } = web3Api
-      const withdrawAmount = web3.utils.toWei("0.1", "ether")
-      await contract.withdraw( withdrawAmount, {
+    const sell10 = async () => {
+      const { contract} = web3Api
+      await contract.sell10({
         from: account
          
       })
@@ -118,20 +138,24 @@ function App() {
           }
         </div>
         <div className="balance-view is-size-2 my-5">
-          Current Balance: <strong>{balance}</strong> ETH
+          Machine Eth: <strong>{balance}</strong> ETH
+        </div>
+
+        <div className="balance-view is-size-2 my-5">
+          Yours Token: <strong>{balanceT}</strong> JTK
         </div>
        
         <button 
         disabled ={!account}
-        onClick = {addFunds}
+        onClick = {buyToken10}
         className="button is-primary mr-2">
-          Donate 1eth
+          Buy 10 Token
           </button>
         <button
         disabled ={!account}
-        onClick = {withdrawFunds}
+        onClick = {sell10}
         className="button is-link">
-          Withdraw 0.1eth
+          Sell 10 Token
           </button>
       </div>
     </div>

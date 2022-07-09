@@ -12,16 +12,16 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
 
-    ropsten: {
-      networkCheckTimeout: 999999,
-      provider: function() {
-        return new HDWalletProvider(
-          "scrub warrior general run pigeon strategy admit crunch pupil away height word", 
-          "https://ropsten.infura.io/v3/18eac1d72d2e48078937e08501b7eae6")
-      },
-      network_id: 3,
-      gas: 4000000      //make sure this gas allocation isn't over 4M, which is the max
-    }
+    // ropsten: {
+    //   networkCheckTimeout: 999999,
+    //   provider: function() {
+    //     return new HDWalletProvider(
+    //       "scrub warrior general run pigeon strategy admit crunch pupil away height word", 
+    //       "https://ropsten.infura.io/v3/18eac1d72d2e48078937e08501b7eae6")
+    //   },
+    //   network_id: 3,
+    //   gas: 4000000      //make sure this gas allocation isn't over 4M, which is the max
+    // }
     
   },
 

@@ -74,7 +74,7 @@ contract Faucet {
 
 //const instance = await Faucet.deployed()
 //0xB7AC6519F010F1710Fb1Bb46a64ca4A08097d07a)
-//instance.addFunds({from:accounts[2], value:"2000000000000000000"})
+//instance.addFunds({from:accounts[2], value:"1000000000000000000"})
 
 //instance.withdraw("500000000000000000", {from: accounts[1]})
 //instance.getFunderAtIndex()
