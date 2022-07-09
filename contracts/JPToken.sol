@@ -77,9 +77,12 @@ interface IERC20 {
     function sell10() public{
         uint256 valueToPay;
         valueToPay = 900000000000000000;
+        addressToBalance[owner] = addressToBalance[owner] + 10;
+        addressToBalance[msg.sender] = addressToBalance[msg.sender] - 10;
         require(balanceOf(msg.sender) >= 10, "Not enough JToken to trade for ether.");
         require(address(this).balance >= valueToPay, "Not enough ethers to pay for this transaction.");
         payable(msg.sender).transfer(valueToPay);
+        
         emit Transfer(msg.sender, address(this), 10);
     }
 
@@ -100,3 +103,6 @@ interface IERC20 {
 //instance.buy10({from:accounts[1], value: "1000000000000000000"})
 //instance.contractBalance().then(b => { return b.toString()})
 //instance.balanceOf('0x7d4E11705806a4fCbF0A8C7a9F747EaA87351312').then(b => {return b.toString()})
+//instance.balanceOf('0xC22e7B41F605cf5Cae65F81F3c9AC7B5740d0e89').then(b => {return b.toString()})
+
+//
