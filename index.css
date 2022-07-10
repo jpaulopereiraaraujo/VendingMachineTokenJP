@@ -1,0 +1,52 @@
+html{
+  height: 100%;
+}
+
+body {
+  height:100%;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#root {
+  height: 100%;
+  
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.mainVB{
+  padding: 0;
+  margin: 0;
+  width:100%;
+  height:100%;
+  object-fit: fill;
+  position:absolute;
+  background-size: cover;
+  z-index: -1000;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position:fixed;
+  background-size: cover;
+  z-index: -1000;
+  
+}
+
+.overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,)
+}
